@@ -66,9 +66,13 @@ def main():
     # Display the graph
     generate_graph(df, plot_style)
     
-    # Button to manually refresh the graph
-    if st.button("Refresh Graph"):
-        st.experimental_rerun()  # Refresh the page to display updated graph
+    # Display the entire database as an Excel sheet
+    st.write("### Entire Database")
+    st.dataframe(df)
+    
+    # Button to manually refresh the graph and database view
+    if st.button("Refresh"):
+        st.experimental_rerun()  # Refresh the page to display updated graph and database view
 
 if __name__ == "__main__":
     main()
