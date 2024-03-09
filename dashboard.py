@@ -66,8 +66,6 @@ def generate_graph(df, plot_style, x_column, y_column, color_column=None):
         st.plotly_chart(fig)
 
 
-
-
 def main():
     st.title("Real-time Data Visualization Dashboard")
     st.write("This dashboard visualizes real-time data from DynamoDB.")
@@ -81,6 +79,14 @@ def main():
     x_column = st.sidebar.selectbox("X-axis:", df.columns)
     y_column = st.sidebar.selectbox("Y-axis:", df.columns)
     color_column = st.sidebar.selectbox("Color By:", [None] + list(df.columns))
+    
+    # Sorting options
+    sort_column = st.sidebar.selectbox("Sort By:", df.columns)
+    ascending = st.sidebar.checkbox("Ascending", True)
+    
+    # Sort the DataFrame
+    if sort_column in df.columns:
+        df = df.sort_values(by=sort_column, ascending=ascending)
     
     # Main content area
     st.header("Graph Visualization")
