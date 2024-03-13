@@ -15,7 +15,7 @@ dynamodb_table_name = "envision"
 dynamodb = boto3.resource('dynamodb', aws_access_key_id=aws_access_key_id, aws_secret_access_key=aws_secret_access_key, region_name=aws_region)
 table = dynamodb.Table(dynamodb_table_name)
 
-@st.cache_data(ttl=10)  # Cache the data for 10 seconds
+@st.cache(persist=True, ttl=10)  # Cache the data for 10 seconds
 def load_data():
     try:
         response = table.scan()
